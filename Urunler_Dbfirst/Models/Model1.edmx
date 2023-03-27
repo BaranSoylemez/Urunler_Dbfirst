@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ASILAR_TESTModelnew.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_DOZ">
+          <Key>
+            <PropertyRef Name="D_ID" />
+          </Key>
+          <Property Name="D_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOZ_ADI" Type="int" />
+          <Property Name="MIKTAR" Type="varchar" MaxLength="50" />
+          <Property Name="MIAT" Type="date" />
+        </EntityType>
+        <EntityType Name="TBL_STOK">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STOK_ADI" Type="int" />
+          <Property Name="SERİ_NO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_TASIMA">
+          <Key>
+            <PropertyRef Name="T_ID" />
+          </Key>
+          <Property Name="T_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_TASIMA" Type="int" />
+          <Property Name="TASIMA_TIPI" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TBL_URUN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URUN_AD" Type="varchar" MaxLength="50" />
+          <Property Name="URUN_TUR" Type="varchar" MaxLength="50" />
+          <Property Name="UYGULAMA" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_TBL_DOZ_TBL_STOK1">
+          <End Role="TBL_STOK" Type="Self.TBL_STOK" Multiplicity="0..1" />
+          <End Role="TBL_DOZ" Type="Self.TBL_DOZ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_STOK">
+              <PropertyRef Name="S_ID" />
+            </Principal>
+            <Dependent Role="TBL_DOZ">
+              <PropertyRef Name="DOZ_ADI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_STOK_TBL_URUN1">
+          <End Role="TBL_URUN" Type="Self.TBL_URUN" Multiplicity="0..1" />
+          <End Role="TBL_STOK" Type="Self.TBL_STOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_URUN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBL_STOK">
+              <PropertyRef Name="STOK_ADI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TASIMA_TBL_DOZ">
+          <End Role="TBL_DOZ" Type="Self.TBL_DOZ" Multiplicity="0..1" />
+          <End Role="TBL_TASIMA" Type="Self.TBL_TASIMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_DOZ">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="TBL_TASIMA">
+              <PropertyRef Name="U_TASIMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ASILAR_TESTModelnewStoreContainer">
+          <EntitySet Name="TBL_DOZ" EntityType="Self.TBL_DOZ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_STOK" EntityType="Self.TBL_STOK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_TASIMA" EntityType="Self.TBL_TASIMA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_URUN" EntityType="Self.TBL_URUN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBL_DOZ_TBL_STOK1" Association="Self.FK_TBL_DOZ_TBL_STOK1">
+            <End Role="TBL_STOK" EntitySet="TBL_STOK" />
+            <End Role="TBL_DOZ" EntitySet="TBL_DOZ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_STOK_TBL_URUN1" Association="Self.FK_TBL_STOK_TBL_URUN1">
+            <End Role="TBL_URUN" EntitySet="TBL_URUN" />
+            <End Role="TBL_STOK" EntitySet="TBL_STOK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TASIMA_TBL_DOZ" Association="Self.FK_TBL_TASIMA_TBL_DOZ">
+            <End Role="TBL_DOZ" EntitySet="TBL_DOZ" />
+            <End Role="TBL_TASIMA" EntitySet="TBL_TASIMA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ASILAR_TESTModelnew" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_DOZ">
+          <Key>
+            <PropertyRef Name="D_ID" />
+          </Key>
+          <Property Name="D_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOZ_ADI" Type="Int32" />
+          <Property Name="MIKTAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MIAT" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TBL_STOK" Relationship="Self.FK_TBL_DOZ_TBL_STOK1" FromRole="TBL_DOZ" ToRole="TBL_STOK" />
+          <NavigationProperty Name="TBL_TASIMA" Relationship="Self.FK_TBL_TASIMA_TBL_DOZ" FromRole="TBL_DOZ" ToRole="TBL_TASIMA" />
+        </EntityType>
+        <EntityType Name="TBL_STOK">
+          <Key>
+            <PropertyRef Name="S_ID" />
+          </Key>
+          <Property Name="S_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STOK_ADI" Type="Int32" />
+          <Property Name="SERİ_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_DOZ" Relationship="Self.FK_TBL_DOZ_TBL_STOK1" FromRole="TBL_STOK" ToRole="TBL_DOZ" />
+          <NavigationProperty Name="TBL_URUN" Relationship="Self.FK_TBL_STOK_TBL_URUN1" FromRole="TBL_STOK" ToRole="TBL_URUN" />
+        </EntityType>
+        <EntityType Name="TBL_TASIMA">
+          <Key>
+            <PropertyRef Name="T_ID" />
+          </Key>
+          <Property Name="T_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_TASIMA" Type="Int32" />
+          <Property Name="TASIMA_TIPI" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TBL_DOZ" Relationship="Self.FK_TBL_TASIMA_TBL_DOZ" FromRole="TBL_TASIMA" ToRole="TBL_DOZ" />
+        </EntityType>
+        <EntityType Name="TBL_URUN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URUN_AD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="URUN_TUR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UYGULAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_STOK" Relationship="Self.FK_TBL_STOK_TBL_URUN1" FromRole="TBL_URUN" ToRole="TBL_STOK" />
+        </EntityType>
+        <Association Name="FK_TBL_DOZ_TBL_STOK1">
+          <End Role="TBL_STOK" Type="Self.TBL_STOK" Multiplicity="0..1" />
+          <End Role="TBL_DOZ" Type="Self.TBL_DOZ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_STOK">
+              <PropertyRef Name="S_ID" />
+            </Principal>
+            <Dependent Role="TBL_DOZ">
+              <PropertyRef Name="DOZ_ADI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_TASIMA_TBL_DOZ">
+          <End Role="TBL_DOZ" Type="Self.TBL_DOZ" Multiplicity="0..1" />
+          <End Role="TBL_TASIMA" Type="Self.TBL_TASIMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_DOZ">
+              <PropertyRef Name="D_ID" />
+            </Principal>
+            <Dependent Role="TBL_TASIMA">
+              <PropertyRef Name="U_TASIMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_STOK_TBL_URUN1">
+          <End Role="TBL_URUN" Type="Self.TBL_URUN" Multiplicity="0..1" />
+          <End Role="TBL_STOK" Type="Self.TBL_STOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_URUN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBL_STOK">
+              <PropertyRef Name="STOK_ADI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ASILAR_TESTEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_DOZ" EntityType="Self.TBL_DOZ" />
+          <EntitySet Name="TBL_STOK" EntityType="Self.TBL_STOK" />
+          <EntitySet Name="TBL_TASIMA" EntityType="Self.TBL_TASIMA" />
+          <EntitySet Name="TBL_URUN" EntityType="Self.TBL_URUN" />
+          <AssociationSet Name="FK_TBL_DOZ_TBL_STOK1" Association="Self.FK_TBL_DOZ_TBL_STOK1">
+            <End Role="TBL_STOK" EntitySet="TBL_STOK" />
+            <End Role="TBL_DOZ" EntitySet="TBL_DOZ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_TASIMA_TBL_DOZ" Association="Self.FK_TBL_TASIMA_TBL_DOZ">
+            <End Role="TBL_DOZ" EntitySet="TBL_DOZ" />
+            <End Role="TBL_TASIMA" EntitySet="TBL_TASIMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_STOK_TBL_URUN1" Association="Self.FK_TBL_STOK_TBL_URUN1">
+            <End Role="TBL_URUN" EntitySet="TBL_URUN" />
+            <End Role="TBL_STOK" EntitySet="TBL_STOK" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ASILAR_TESTModelnewStoreContainer" CdmEntityContainer="ASILAR_TESTEntities2">
+          <EntitySetMapping Name="TBL_DOZ">
+            <EntityTypeMapping TypeName="ASILAR_TESTModelnew.TBL_DOZ">
+              <MappingFragment StoreEntitySet="TBL_DOZ">
+                <ScalarProperty Name="D_ID" ColumnName="D_ID" />
+                <ScalarProperty Name="DOZ_ADI" ColumnName="DOZ_ADI" />
+                <ScalarProperty Name="MIKTAR" ColumnName="MIKTAR" />
+                <ScalarProperty Name="MIAT" ColumnName="MIAT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_STOK">
+            <EntityTypeMapping TypeName="ASILAR_TESTModelnew.TBL_STOK">
+              <MappingFragment StoreEntitySet="TBL_STOK">
+                <ScalarProperty Name="S_ID" ColumnName="S_ID" />
+                <ScalarProperty Name="STOK_ADI" ColumnName="STOK_ADI" />
+                <ScalarProperty Name="SERİ_NO" ColumnName="SERİ_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_TASIMA">
+            <EntityTypeMapping TypeName="ASILAR_TESTModelnew.TBL_TASIMA">
+              <MappingFragment StoreEntitySet="TBL_TASIMA">
+                <ScalarProperty Name="T_ID" ColumnName="T_ID" />
+                <ScalarProperty Name="U_TASIMA" ColumnName="U_TASIMA" />
+                <ScalarProperty Name="TASIMA_TIPI" ColumnName="TASIMA_TIPI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_URUN">
+            <EntityTypeMapping TypeName="ASILAR_TESTModelnew.TBL_URUN">
+              <MappingFragment StoreEntitySet="TBL_URUN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="URUN_AD" ColumnName="URUN_AD" />
+                <ScalarProperty Name="URUN_TUR" ColumnName="URUN_TUR" />
+                <ScalarProperty Name="UYGULAMA" ColumnName="UYGULAMA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
